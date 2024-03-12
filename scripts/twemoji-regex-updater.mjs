@@ -28,9 +28,9 @@ const fileSuffix = [';', ''].join('\n');
 const shaTrackerFileUrl = new URL('sha-tracker.json', import.meta.url);
 const twemojiRegexFileUrl = new URL('../src/utils/twemojiRegex.ts', import.meta.url);
 const oneMonthAgo = Date.now() - 1000 * 60 * 60 * 24 * 30;
-const timestamp = new Date(oneMonthAgo).toISOString();
+const timestamp = new Date(oneMonthAgo * 3).toISOString();
 
-const url = new URL('https://api.github.com/repos/twitter/twemoji-parser/commits');
+const url = new URL('https://api.github.com/repos/jdecked/twemoji-parser/commits');
 url.searchParams.append('path', 'src/lib/regex.js');
 url.searchParams.append('since', timestamp);
 
@@ -48,7 +48,7 @@ if (data.sha === null || data.sha === ciData.twemojiRegexLastSha) {
 }
 
 const { default: regexFromWeb } = await importFileFromWeb({
-  url: 'https://raw.githubusercontent.com/twitter/twemoji-parser/master/src/lib/regex.js',
+  url: 'https://raw.githubusercontent.com/jdecked/twemoji-parser/master/src/lib/regex.js',
   temporaryFileName: 'regex.mjs',
 });
 
